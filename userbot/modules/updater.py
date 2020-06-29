@@ -46,28 +46,28 @@ async def update_requirements():
 @register(outgoing=True, pattern="^.update(?: |$)(.*)")
 async def upstream(ups):
     "For .update command, check if the bot is up to date, update if specified"
-    await ups.edit("`Checking for updates, please wait....`")
+    await ups.edit("`Sto controllando gli aggiornamenti, aspetta....`")
     conf = ups.pattern_match.group(1)
     off_repo = UPSTREAM_REPO_URL
     force_update = False
 
     try:
-        txt = "`Oops.. Updater cannot continue due to "
-        txt += "some problems occured`\n\n**LOGTRACE:**\n"
+        txt = "`Oops.. L'installer ha incontrato un'errore "
+        txt += "alcuni problemi si sono verificati:`\n\n**LOGTRACE:**\n"
         repo = Repo()
     except NoSuchPathError as error:
-        await ups.edit(f'{txt}\n`directory {error} is not found`')
+        await ups.edit(f'{txt}\n`cartella {error} non trovata`')
         repo.__del__()
         return
     except GitCommandError as error:
-        await ups.edit(f'{txt}\n`Early failure! {error}`')
+        await ups.edit(f'{txt}\n`Errore critico! {error}`')
         repo.__del__()
         return
     except InvalidGitRepositoryError as error:
         if conf != "now":
             await ups.edit(
-                f"`Unfortunately, the directory {error} does not seem to be a git repository.\
-            \nBut we can fix that by force updating the userbot using .update now.`"
+                f"`Sfortunatamente, la cartella {error} non sembra essere una repo.\
+            \nPerò possiamo risolvere questo forzando l'aggiornamento usando .update now.`"
             )
             return
         repo = Repo.init()
@@ -81,10 +81,10 @@ async def upstream(ups):
     ac_br = repo.active_branch.name
     if ac_br != 'master':
         await ups.edit(
-            f'**[UPDATER]:**` Looks like you are using your own custom branch ({ac_br}). '
-            'in that case, Updater is unable to identify '
-            'which branch is to be merged. '
-            'please checkout to any official branch`')
+            f'**[UPDATER]:**` Sembra che stai usando una branch custom ({ac_br}). '
+            'in questo caso, Updater non riesce ad indentificare '
+            'quale branch da usare. '
+            'per favore contatta @xfl4me`')
         repo.__del__()
         return
 
@@ -100,14 +100,14 @@ async def upstream(ups):
 
     if not changelog and not force_update:
         await ups.edit(
-            f'\n`Your BOT is`  **up-to-date**  `with`  **{ac_br}**\n')
+            f'\n`Il tuo bot è`  **aggiornato**  `con`  **{ac_br}**\n')
         repo.__del__()
         return
 
     if conf != "now" and not force_update:
-        changelog_str = f'**New UPDATE available for [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`'
+        changelog_str = f'**Nuovo aggiornamento disponibile per [{ac_br}]:\n\nCHANGELOG:**\n`{changelog}`'
         if len(changelog_str) > 4096:
-            await ups.edit("`Changelog is too big, view the file to see it.`")
+            await ups.edit("`Changelog è troppo grande, apri il file per vederlo.`")
             file = open("output.txt", "w+")
             file.write(changelog_str)
             file.close()
@@ -119,14 +119,14 @@ async def upstream(ups):
             remove("output.txt")
         else:
             await ups.edit(changelog_str)
-        await ups.respond('`do \".update now\" to update`')
+        await ups.respond('`scrivi \".update now\" per aggiornare`')
         return
 
     if force_update:
         await ups.edit(
-            '`Force-Syncing to latest stable userbot code, please wait...`')
+            '`Forzando updater.py, per favore aspetta...`')
     else:
-        await ups.edit('`Updating userbot, please wait....`')
+        await ups.edit('`Aggiornando userbot, aspetta....`')
     # We're in a Heroku Dyno, handle it's memez.
     if HEROKU_APIKEY is not None:
         import heroku3
@@ -167,8 +167,8 @@ async def upstream(ups):
             await ups.edit(f'{txt}\n`Here is the error log:\n{error}`')
             repo.__del__()
             return
-        await ups.edit('`Successfully Updated!\n'
-                       'Restarting, please wait...`')
+        await ups.edit('`Aggiornato correttamente!\n'
+                       'Riavvio!, aspetta...`')
     else:
         # Classic Updater, pretty straightforward.
         try:
@@ -176,8 +176,8 @@ async def upstream(ups):
         except GitCommandError:
             repo.git.reset("--hard", "FETCH_HEAD")
         reqs_upgrade = await update_requirements()
-        await ups.edit('`Successfully Updated!\n'
-                       'Bot is restarting... Wait for a second!`')
+        await ups.edit('`Aggiornato correttamente!\n'
+                       'Riavvio... aspettta per un secondo!`')
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, os.environ)
@@ -187,7 +187,7 @@ async def upstream(ups):
 CMD_HELP.update({
     'update':
     ".update\
-\nUsage: Checks if the main userbot repository has any updates and shows a changelog if so.\
+\nUtilizzo: Checks if the main userbot repository has any updates and shows a changelog if so.\
 \n\n.update now\
 \nUsage: Updates your userbot, if there are any updates in the main userbot repository."
 })
