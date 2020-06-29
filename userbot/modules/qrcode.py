@@ -44,7 +44,7 @@ async def parseqr(qr_e):
     if not t_response:
         logger.info(e_response)
         logger.info(t_response)
-        await qr_e.edit("Failed to decode.")
+        await qr_e.edit("Errore.")
         return
     soup = BeautifulSoup(t_response, "html.parser")
     qr_contents = soup.find_all("pre")[0].text
@@ -54,7 +54,7 @@ async def parseqr(qr_e):
 @register(pattern=r"^.barcode(?: |$)([\s\S]*)", outgoing=True)
 async def barcode(event):
     """ For .barcode command, genrate a barcode containing the given content. """
-    await event.edit("`Processing..`")
+    await event.edit("`Caricamento...`")
     input_str = event.pattern_match.group(1)
     message = "SYNTAX: `.barcode <long text to include>`"
     reply_msg_id = event.message.id
@@ -139,15 +139,15 @@ async def make_qr(makeqr):
 CMD_HELP.update({
     'qr':
     ".makeqr <content>\
-\nUsage: Make a QR Code from the given content.\
-\nExample: .makeqr www.google.com\
-\nNote: use .decode <reply to barcode/qrcode> to get decoded content."
+\nUtilizzo: Crea un qr code dal contenuto inviato.\
+\nEsempio: .makeqr www.google.com\
+\nNota: usa .decode <risposta alla barcode/qrcode>per decodificarla."
 })
 
 CMD_HELP.update({
     'barcode':
     ".barcode <content>\
-\nUsage: Make a BarCode from the given content.\
-\nExample: .barcode www.google.com\
-\nNote: use .decode <reply to barcode/qrcode> to get decoded content."
+\nUtilizzo: Crea una barcode.\
+\nEsempio: .barcode www.google.com\
+\nNota: usa .decode <risposta alla barcode/qrcode> per decodificare."
 })

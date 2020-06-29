@@ -36,15 +36,15 @@ async def okgoogle(img):
         photo = io.BytesIO()
         await bot.download_media(message, photo)
     else:
-        await img.edit("`Reply to photo or sticker nigger.`")
+        await img.edit("`Rispondi ad una foto o ad uno sticker.`")
         return
 
     if photo:
-        await img.edit("`Processing...`")
+        await img.edit("`Caricamento`")
         try:
             image = Image.open(photo)
         except OSError:
-            await img.edit('`Unsupported sexuality, most likely.`')
+            await img.edit('`EHH, fjdfidfidjnidjnffidjn errore di Sistem2392`')
             return
         name = "okgoogle.png"
         image.save(name, "PNG")
@@ -61,10 +61,10 @@ async def okgoogle(img):
         fetchUrl = response.headers['Location']
 
         if response != 400:
-            await img.edit("`Image successfully uploaded to Google. Maybe.`"
-                           "\n`Parsing source now. Maybe.`")
+            await img.edit("`Immagine caricata su Google, forse.`"
+                           "\n`Caricamento ora, forse.`")
         else:
-            await img.edit("`Google told me to fuck off.`")
+            await img.edit("`Google mi ha mandato a fanculo.`")
             return
 
         os.remove(name)
@@ -74,9 +74,9 @@ async def okgoogle(img):
         imgspage = match['similar_images']
 
         if guess and imgspage:
-            await img.edit(f"[{guess}]({fetchUrl})\n\n`Looking for images...`")
+            await img.edit(f"[{guess}]({fetchUrl})\n\n`Cercando le immagini...`")
         else:
-            await img.edit("`Couldn't find anything for your dumbfuck ass.`")
+            await img.edit("`Google non ha trovato nulla`")
             return
 
         if img.pattern_match.group(1):

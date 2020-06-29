@@ -9,7 +9,7 @@ from telethon.tl.functions.messages import SendMediaRequest
 
 @register(outgoing=True, pattern="^\.pic(?: |$)(.*)")
 async def on_file_to_photo(pics):
-    await pics.edit("Converting Document image to Full Size Image\nPlease wait...")
+    await pics.edit("Convertendo l'immagine da un file ad una allegata\nAspetta...")
     await sleep(2.5)
     await pics.delete()
     target = await pics.get_reply_message()
@@ -40,7 +40,7 @@ async def on_file_to_photo(pics):
     except PhotoInvalidDimensionsError:
         return
 
-        
+
 CMD_HELP.update({
-    "pics": ".pic reply any document image\nUsage : Convert any Document Image to Full Size Image"
+    "pics": ".pic reply any document image\nUtilizzo : Converte un documento ad un immagine"
 })
