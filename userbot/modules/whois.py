@@ -31,7 +31,7 @@ async def who(event):
     try:
         photo, caption = await fetch_info(replied_user, event)
     except AttributeError:
-        event.edit("`Could not fetch info of that user.`")
+        event.edit("`Impossibile hakerare Telegram oggi.`")
         return
 
     message_id_to_reply = event.message.reply_to_msg_id
@@ -122,26 +122,26 @@ async def fetch_info(replied_user, event):
                                                       str(user_id) + ".jpg",
                                                       download_big=True)
     first_name = first_name.replace(
-        "\u2060", "") if first_name else ("This User has no First Name")
+        "\u2060", "") if first_name else ("Questo utente non ha un nome(loll)")
     last_name = last_name.replace(
-        "\u2060", "") if last_name else ("This User has no Last Name")
+        "\u2060", "") if last_name else ("Questo utente non ha un cognome, come obama")
     username = "@{}".format(username) if username else (
-        "This User has no Username")
-    user_bio = "This User has no About" if not user_bio else user_bio
+        "Questo utente è un noob perché non ha settato l'username")
+    user_bio = "Questo utente non ha una bio, quindi non è nessuno" if not user_bio else user_bio
 
     caption = "<b>USER INFO:</b>\n\n"
-    caption += f"First Name: {first_name}\n"
-    caption += f"Last Name: {last_name}\n"
+    caption += f"Nome: {first_name}\n"
+    caption += f"Cognome: {last_name}\n"
     caption += f"Username: {username}\n"
-    caption += f"Data Centre ID: {dc_id}\n"
-    caption += f"Number of Profile Pics: {replied_user_profile_photos_count}\n"
-    caption += f"Is Bot: {is_bot}\n"
-    caption += f"Is Restricted: {restricted}\n"
-    caption += f"Is Verified by Telegram: {verified}\n"
+    caption += f"Data CENTER (VOIP): {dc_id}\n"
+    caption += f"Numero di propic: {replied_user_profile_photos_count}\n"
+    caption += f"E'bot: {is_bot}\n"
+    caption += f"E' limitato: {restricted}\n"
+    caption += f"Ha il verificato: {verified}\n"
     caption += f"ID: <code>{user_id}</code>\n\n"
     caption += f"Bio: \n<code>{user_bio}</code>\n\n"
-    caption += f"Common Chats with this user: {common_chat}\n"
-    caption += f"Permanent Link To Profile: "
+    caption += f"Gruppi in comune: {common_chat}\n"
+    caption += f"Link permanente al suo profilo: "
     caption += f"<a href=\"tg://user?id={user_id}\">{first_name}</a>"
 
     return photo, caption
@@ -149,6 +149,6 @@ async def fetch_info(replied_user, event):
 
 CMD_HELP.update({
     "whois":
-    ".whois <username> or reply to someones text with .whois\
-    \nUsage: Gets info of an user."
+    ".whois <username> o rispondi ad un messaggio con .whois\
+    \nUtilizzo: Informazioni varie sull'utente."
 })
