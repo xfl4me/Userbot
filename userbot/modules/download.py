@@ -29,7 +29,7 @@ TEMP_DOWNLOAD_DIRECTORY = os.environ.get("TMP_DOWNLOAD_DIRECTORY", "./")
 def progress(current, total):
     """ Logs the download progress """
     LOGS.info(
-        "Downloaded %s of %s\nCompleted %s",
+        "Scaricato %s di %s\nCompletato %s",
         current, total, (current / total) * 100
     )
 
@@ -54,7 +54,7 @@ async def download(target_file):
             end = datetime.now()
             duration = (end - start).seconds
             await target_file.edit(
-                "Downloaded to `{}` in {} seconds.".format(
+                "Scaricato a `{}` in {} secondi.".format(
                     downloaded_file_name, duration)
             )
         elif "|" in input_str:
@@ -77,7 +77,7 @@ async def download(target_file):
                         downloaded += len(chunk)
                         file.write(chunk)
                         done = int(100 * downloaded / total_length)
-                        download_progress_string = "Downloading ... [%s%s]" % (
+                        download_progress_string = "Scaricando ... [%s%s]" % (
                             "=" * done,
                             " " * (50 - done),
                         )
@@ -85,11 +85,11 @@ async def download(target_file):
             end = datetime.now()
             duration = (end - start).seconds
             await target_file.edit(
-                "Downloaded to `{}` in {} seconds.".format(
+                "Scaricato a `{}` in {} secondi.".format(
                     required_file_name, duration)
             )
         else:
-            await target_file.edit("Reply to a message to download to my local server.")
+            await target_file.edit("Rispondi ad un messaggio per scaricarlo nel server.")
 
 
 @register(pattern=r".uploadir (.*)", outgoing=True)
@@ -101,7 +101,7 @@ async def uploadir(udir_event):
         input_str = udir_event.pattern_match.group(1)
         if os.path.exists(input_str):
             start = datetime.now()
-            await udir_event.edit("Processing ...")
+            await udir_event.edit("Scaricando ...")
             lst_of_files = []
             for r, d, f in os.walk(input_str):
                 for file in f:
@@ -111,7 +111,7 @@ async def uploadir(udir_event):
             LOGS.info(lst_of_files)
             uploaded = 0
             await udir_event.edit(
-                "Found {} files. Uploading will start soon. Please wait!".format(
+                "Trovati {} files. L'upload inizierà presto. Vuoi un caffé?".format(
                     len(lst_of_files)
                 )
             )
@@ -164,9 +164,9 @@ async def uploadir(udir_event):
                     uploaded = uploaded + 1
             end = datetime.now()
             duration = (end - start).seconds
-            await udir_event.edit("Uploaded {} files in {} seconds.".format(uploaded, duration))
+            await udir_event.edit("Caricati {} files in {} secondi.".format(uploaded, duration))
         else:
-            await udir_event.edit("404: Directory Not Found")
+            await udir_event.edit("404: Cartella non trovata")
 
 
 @register(pattern=r".upload (.*)", outgoing=True)
@@ -176,12 +176,12 @@ async def upload(u_event):
         if u_event.fwd_from:
             return
         if u_event.is_channel and not u_event.is_group:
-            await u_event.edit("`Uploading isn't permitted on channels`")
+            await u_event.edit("`L'upload non è permesso nei canali`")
             return
         await u_event.edit("Processing ...")
         input_str = u_event.pattern_match.group(1)
         if input_str in ("userbot.session", "config.env"):
-            await u_event.edit("`That's a dangerous operation! Not Permitted!`")
+            await u_event.edit("`Questa è un operazione pericolosa! Non permessa!`")
             return
         if os.path.exists(input_str):
             start = datetime.now()
@@ -195,9 +195,9 @@ async def upload(u_event):
             )
             end = datetime.now()
             duration = (end - start).seconds
-            await u_event.edit("Uploaded in {} seconds.".format(duration))
+            await u_event.edit("Caricato in {} secondi.".format(duration))
         else:
-            await u_event.edit("404: File Not Found")
+            await u_event.edit("404: File non trovato")
 
 
 def get_video_thumb(file, output=None, width=90):
@@ -259,7 +259,7 @@ async def uploadas(uas_event):
     if not uas_event.text[0].isalpha() and uas_event.text[0] not in ("/", "#", "@", "!"):
         if uas_event.fwd_from:
             return
-        await uas_event.edit("Processing ...")
+        await uas_event.edit("Caricando ...")
         type_of_upload = uas_event.pattern_match.group(1)
         supports_streaming = False
         round_message = False
@@ -334,20 +334,20 @@ async def uploadas(uas_event):
                         progress_callback=progress,
                     )
                 elif spam_big_messages:
-                    await uas_event.edit("TBD: Not (yet) Implemented")
+                    await uas_event.edit("TBD: Non (ancora) Implementato")
                     return
                 end = datetime.now()
                 duration = (end - start).seconds
                 os.remove(thumb)
-                await uas_event.edit("Uploaded in {} seconds.".format(duration))
+                await uas_event.edit("Caricato in {} secondi.".format(duration))
             except FileNotFoundError as err:
                 await uas_event.edit(str(err))
         else:
-            await uas_event.edit("404: File Not Found")
+            await uas_event.edit("404: File Non Trovato")
 
 CMD_HELP.update({
-    "download": ".download <link>\nUsage: Downloads file from link to the server."
+    "download": ".download <link>\nUtilizzo: Scarica i file da un link ai server."
 })
 CMD_HELP.update({
-    "upload": ".upload <link>\nUsage: Uploads a locally stored file to telegram."
+    "upload": ".upload <link>\nUtilizzo: Carica un file locale a telegram."
 })
