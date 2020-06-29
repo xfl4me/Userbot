@@ -53,7 +53,7 @@ async def get_weather(weather):
         CITY = DEFCITY
         if not CITY:
             await weather.edit(
-                "`Please specify a city or set one as default using the WEATHER_DEFCITY config variable.`"
+                "`Per favore specifica una città o impostane una dalle variabili.`"
             )
             return
     else:
@@ -73,7 +73,7 @@ async def get_weather(weather):
             try:
                 countrycode = timezone_countries[f'{country}']
             except KeyError:
-                await weather.edit("`Invalid country.`")
+                await weather.edit("`Paese invalido.`")
                 return
             CITY = newcity[0].strip() + "," + countrycode.strip()
 
@@ -82,7 +82,7 @@ async def get_weather(weather):
     result = json.loads(request.text)
 
     if request.status_code != 200:
-        await weather.edit(f"`Invalid country.`")
+        await weather.edit(f"`Paese invalido.`")
         return
 
     cityname = result['name']
@@ -137,6 +137,6 @@ async def get_weather(weather):
 
 CMD_HELP.update({
     "weather":
-    ".weather <city> or .weather <city>, <country name/code>\
-    \nUsage: Gets the weather of a city."
+    ".weather <città> or .weather <città>, <paese>\
+    \nUtilizzo: Cerca il meteo."
 })

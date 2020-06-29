@@ -107,7 +107,7 @@ async def save_welcome(event):
     elif event.reply_to_msg_id and not string:
         rep_msg = await event.get_reply_message()
         string = rep_msg.text
-    success = "`Welcome note {} for this chat.`"
+    success = "`Messaggio di benvenuto {} per questa chat.`"
     if add_welcome_setting(event.chat_id, 0, string, msg_id) is True:
         await event.edit(success.format('saved'))
     else:
@@ -123,17 +123,17 @@ async def show_welcome(event):
         return
     cws = get_current_welcome_settings(event.chat_id)
     if not cws:
-        await event.edit("`No welcome message saved here.`")
+        await event.edit("`Nessun messaggio di benvenuto salvato.`")
         return
     elif cws and cws.f_mesg_id:
         msg_o = await event.client.get_messages(entity=BOTLOG_CHATID,
                                                 ids=int(cws.f_mesg_id))
         await event.edit(
-            "`I am currently welcoming new users with this welcome note.`")
+            "`Sto dando il benvenuto ai nuovi utenti con questo messaggio`")
         await event.reply(msg_o.message, file=msg_o.media)
     elif cws and cws.reply:
         await event.edit(
-            "`I am currently welcoming new niggs with this welcome note.`")
+            "`Sto dando il benvenuto ai nuovi utenti con questo messaggio.`")
         await event.reply(cws.reply)
 
 
@@ -145,21 +145,21 @@ async def del_welcome(event):
         await event.edit("`Running on Non-SQL mode!`")
         return
     if rm_welcome_setting(event.chat_id) is True:
-        await event.edit("`Welcome note deleted for this chat.`")
+        await event.edit("`Messaggio di benvenuto eliminato per questa chat.`")
     else:
-        await event.edit("`Do I have a welcome note here ?`")
+        await event.edit("`Non ho un messaggio di benvenuto qui.`")
 
 
 CMD_HELP.update({
     "welcome":
     "\
-.setwelcome <welcome message> or reply to a message with .setwelcome\
-\nUsage: Saves the message as a welcome note in the chat.\
-\n\nAvailable variables for formatting welcome messages :\
+.setwelcome <welcome message> o rispondi ad un messaggio con .setwelcome\
+\nUtilizzo: Salva il messaggio come il benvenuto per questa chat.\
+\n\nVariabili disponibili :\
 \n`{mention}, {title}, {count}, {first}, {last}, {fullname}, {userid}, {username}, {my_first}, {my_fullname}, {my_last}, {my_mention}, {my_username}`\
 \n\n.checkwelcome\
-\nUsage: Check whether you have a welcome note in the chat.\
+\nUtilizzo: Controlla se hai un benvenuto salvato.\
 \n\n.rmwelcome\
-\nUsage: Deletes the welcome note for the current chat.\
+\nUtilizzo: Cancella il benvenuto per questa chat.\
 "
 })
