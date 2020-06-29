@@ -177,7 +177,7 @@ async def upstream(ups):
             repo.git.reset("--hard", "FETCH_HEAD")
         reqs_upgrade = await update_requirements()
         await ups.edit('`Aggiornato correttamente!\n'
-                       'Riavvio... aspettta per un secondo!`')
+                       'Riavvio... aspetta per un secondo!`')
         # Spin a new instance of bot
         args = [sys.executable, "-m", "userbot"]
         execle(sys.executable, *args, os.environ)
