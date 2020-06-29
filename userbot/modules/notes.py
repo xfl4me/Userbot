@@ -18,11 +18,11 @@ async def notes_active(svd):
     except AttributeError:
         await svd.edit("`Running on Non-SQL mode!`")
         return
-    message = "`There are no saved notes in this chat`"
+    message = "`Non ci sono note salvate qui!`"
     notes = get_notes(svd.chat_id)
     for note in notes:
-        if message == "`There are no saved notes in this chat`":
-            message = "Notes saved in this chat:\n"
+        if message == "`Non ci sono note salvate qui!`":
+            message = "Note salvate qui:\n"
             message += "`#{}`\n".format(note.keyword)
         else:
             message += "`#{}`\n".format(note.keyword)
@@ -39,10 +39,10 @@ async def remove_notes(clr):
         return
     notename = clr.pattern_match.group(1)
     if rm_note(clr.chat_id, notename) is False:
-        return await clr.edit("`Couldn't find note:` **{}**".format(notename))
+        return await clr.edit("`Impossibile trovare la nota:` **{}**".format(notename))
     else:
         return await clr.edit(
-            "`Successfully deleted note:` **{}**".format(notename))
+            "`Nota eliminata correttamente:` **{}**".format(notename))
 
 
 @register(outgoing=True, pattern=r"^.save (\w*)")
@@ -78,7 +78,7 @@ async def add_note(fltr):
     elif fltr.reply_to_msg_id and not string:
         rep_msg = await fltr.get_reply_message()
         string = rep_msg.text
-    success = "`Note {} successfully. Use` #{} `to get it`"
+    success = "`Nota {} correttamente. Usa` #{} `per averla`"
     if add_note(str(fltr.chat_id), keyword, string, msg_id) is False:
         return await fltr.edit(success.format('updated', keyword))
     else:
@@ -127,9 +127,9 @@ async def kick_marie_notes(kick):
         Marie(or her clones) notes from a chat. """
     bot_type = kick.pattern_match.group(1).lower()
     if bot_type not in ["marie", "rose"]:
-        await kick.edit("`That bot is not yet supported!`")
+        await kick.edit("`Questo bot non è ancora supportato!`")
         return
-    await kick.edit("```Will be kicking away all Notes!```")
+    await kick.edit("```Distruggerà tutte le note!```")
     await sleep(3)
     resp = await kick.get_reply_message()
     filters = resp.text.split("-")[1:]
@@ -141,23 +141,23 @@ async def kick_marie_notes(kick):
             await kick.reply("/clear %s" % (i.strip()))
         await sleep(0.3)
     await kick.respond(
-        "```Successfully purged bots notes yaay!```\n Gimme cookies!")
+        "```Bot tolti correttamente!```\n Dammi dei biscotti!")
     if BOTLOG:
         await kick.client.send_message(
-            BOTLOG_CHATID, "I cleaned all Notes at " + str(kick.chat_id))
+            BOTLOG_CHATID, "Ho pulito tutte le note a " + str(kick.chat_id))
 
 
 CMD_HELP.update({
     "notes":
     "\
 #<notename>\
-\nUsage: Gets the specified note.\
-\n\n.save <notename> <notedata> or reply to a message with .save <notename>\
-\nUsage: Saves the replied message as a note with the notename. (Works with pics, docs, and stickers too!)\
+\nUtilizzo: Invia la nota corrispondente.\
+\n\n.save <nome> <valore> o rispondi ad un messaggio con .save <nome>\
+\nUtiizzo: Salva il messaggio risposto nelle note. (Funziona con foto, sticker e file!)\
 \n\n.notes\
-\nUsage: Gets all saved notes in a chat.\
-\n\n.clear <notename>\
-\nUsage: Deletes the specified note.\
+\nUtilizzo: Invia la lista delle note salvate in una chat.\
+\n\n.clear <nome>\
+\nUsage: Cancella la nota selezionata.\
 \n\n.rmbotnotes <marie/rose>\
-\nUsage: Removes all notes of admin bots (Currently supported: Marie, Rose and their clones.) in the chat."
+\nUtilizzo: Rimuove tutte le note dei bot admin (Supportati: Marie, Rose e i loro cloni.) nella chat."
 })

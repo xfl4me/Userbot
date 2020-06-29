@@ -17,7 +17,7 @@ from userbot.events import register
 async def evaluate(query):
     """ For .eval command, evaluates the given Python expression. """
     if query.is_channel and not query.is_group:
-        await query.edit("`Eval isn't permitted on channels`")
+        await query.edit("`Eval non è permesso nei canali`")
         return
 
     if query.pattern_match.group(1):
@@ -27,7 +27,7 @@ async def evaluate(query):
         return
 
     if expression in ("userbot.session", "config.env"):
-        await query.edit("`That's a dangerous operation! Not Permitted!`")
+        await query.edit("`Questà è una operazione pericolosa! Non permesso!`")
         return
 
     try:
@@ -42,7 +42,7 @@ async def evaluate(query):
                         query.chat_id,
                         "output.txt",
                         reply_to=query.id,
-                        caption="`Output too large, sending as file`",
+                        caption="`Output troppo grande, invio come file...`",
                     )
                     remove("output.txt")
                     return

@@ -27,7 +27,7 @@ async def useridgetter(target):
                 name = "@" + message.forward.sender.username
             else:
                 name = "*" + message.forward.sender.first_name + "*"
-        await target.edit("**Name:** {} \n**User ID:** `{}`".format(
+        await target.edit("**Nome:** {} \n**User ID:** `{}`".format(
             name, user_id))
 
 
@@ -63,11 +63,11 @@ async def log(log_text):
             textx = user + log_text.pattern_match.group(1)
             await bot.send_message(BOTLOG_CHATID, textx)
         else:
-            await log_text.edit("`What am I supposed to log?`")
+            await log_text.edit("`Cosa dovrei loggare?`")
             return
-        await log_text.edit("`Logged Successfully`")
+        await log_text.edit("`Loggato nel gruppo log`")
     else:
-        await log_text.edit("`This feature requires Logging to be enabled!`")
+        await log_text.edit("`Questa funzione richiede che il logging sia abilitato!`")
     await sleep(2)
     await log_text.delete()
 
@@ -75,7 +75,7 @@ async def log(log_text):
 @register(outgoing=True, pattern="^.kickme$")
 async def kickme(leave):
     """ Basically it's .kickme command """
-    await leave.edit("Nope, no, no, I go away")
+    await leave.edit("Addio")
     await leave.client.kick_participant(leave.chat_id, 'me')
 
 
@@ -88,7 +88,7 @@ async def unmute_chat(unm_e):
         await unm_e.edit('`Running on Non-SQL Mode!`')
         return
     unkread(str(unm_e.chat_id))
-    await unm_e.edit("```Unmuted this chat Successfully```")
+    await unm_e.edit("```Chat smutata correttamente!```")
     await sleep(2)
     await unm_e.delete()
 
@@ -103,13 +103,13 @@ async def mute_chat(mute_e):
         return
     await mute_e.edit(str(mute_e.chat_id))
     kread(str(mute_e.chat_id))
-    await mute_e.edit("`Shush! This chat will be silenced!`")
+    await mute_e.edit("`Questa chat verrà silenziata!`")
     await sleep(2)
     await mute_e.delete()
     if BOTLOG:
         await mute_e.client.send_message(
             BOTLOG_CHATID,
-            str(mute_e.chat_id) + " was silenced.")
+            str(mute_e.chat_id) + " era silenziata.")
 
 
 @register(incoming=True, disable_errors=True)
@@ -157,17 +157,17 @@ async def sedNinjaToggle(event):
 CMD_HELP.update({
     "chat":
     ".chatid\
-\nUsage: Fetches the current chat's ID\
+\nUsage: Prende l'id della chat\
 \n\n.userid\
-\nUsage: Fetches the ID of the user in reply, if its a forwarded message, finds the ID for the source.\
+\nUsage: Prende l'id dell'utente, in risposta ad un messaggio.\
 \n\n.log\
-\nUsage: Forwards the message you've replied to in your bot logs group.\
+\nUsage: Inoltra il messaggio a cui hai risposto nel gruppo log.\
 \n\n.kickme\
-\nUsage: Leave from a targeted group.\
+\nUsage: Abbandona il gruppo.\
 \n\n.unmutechat\
-\nUsage: Unmutes a muted chat.\
+\nUsage: Smuta una chat mutata.\
 \n\n.mutechat\
-\nUsage: Allows you to mute any chat.\
+\nUsage: Permette di mutare una cha.\
 \n\n.link <username/userid> : <optional text> (or) reply to someone's message with .link <optional text>\
 \nUsage: Generate a permanent link to the user's profile with optional custom text.\
 \n\n.regexninja on/off\

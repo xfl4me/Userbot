@@ -21,22 +21,22 @@ from userbot.modules.admin import get_user_from_event
 
 # ================= CONSTANT =================
 METOOSTR = [
-    "Me too thanks",
-    "Haha yes, me too",
-    "Same lol",
+    "Anche io grazie",
+    "Haha si, anche io",
+    "Idem lol",
     "Me irl",
-    "Same here",
-    "Haha yes",
-    "Me rn",
+    "Idem qui",
+    "Haha si",
+    "Idem",
 ]
 NOOBSTR = [
-    "`You Noob don't mess with Me!`",
-    "`Noob Boi trying to be Famous Lol`",
-    "`Some Nibbas need to open their small minds instead of their Big Mouths`",
-    "`Ah! you don't me, stay away Noob`",
-    "`I only talk with Pros. You better go away!`",
-    "`Itna bada Noobda dekhlia ab to marna hoga`",
-    "`You're a Noob and You won't get that !`",
+    "`Noob non mi rompere i cojoni`",
+    "`Noob sta cercando di essere famoso!`",
+    "`Alcuni nibba dovrebbero aprire la loro mente invece di aprire la loro lurida bocca`",
+    "`AH! Stai lontano noob!`",
+    "`Posso parlare solo con i pro. Ti conviene andartene!`",
+    "`Fuck you noob`",
+    "`Sei un noob e non lo capiresti !`",
 ]
 ZALG_LIST = [[
     "̖",
@@ -184,47 +184,47 @@ EMOJIS = [
 ]
 
 INSULT_STRINGS = [
-    "Owww ... Such a stupid idiot.",
-    "Don't drink and type.",
-    "I think you should go home or better a mental asylum.",
-    "Command not found. Just like your brain.",
+    "Owww ... Che idiota stupido.",
+    "Non bere e scrivere.",
+    "Penso che dovresti andare a casa o meglio ad un asilo mentale.",
+    "Commando non trovato, come la tua mente.",
     "Do you realize you are making a fool of yourself? Apparently not.",
-    "You can type better than that.",
-    "Bot rule no.420 under section 69 prevents me from replying to stupid humans like you.",
-    "Sorry, we do not sell brains.",
-    "Believe me you are not normal.",
-    "I bet your brain feels as good as new, seeing that you never use it.",
-    "If I wanted to kill myself I'd climb your ego and jump to your IQ.",
-    "Zombies eat brains... you're safe.",
-    "You didn't evolve from apes, they evolved from you.",
-    "Come back and talk to me when your I.Q. exceeds your age.",
-    "I'm not saying you're stupid, I'm just saying you've got bad luck when it comes to thinking.",
-    "What language are you speaking? Cause it sounds like bullshit.",
-    "Stupidity is not a crime so you are free to go.",
-    "You are proof that evolution CAN go in reverse.",
-    "I would ask you how old you are but I know you can't count that high.",
-    "As an outsider, what do you think of the human race?",
-    "Brains aren't everything. In your case they're nothing.",
-    "Ordinarily people live and learn. You just live.",
-    "I don't know what makes you so stupid, but it really works.",
-    "Keep talking, someday you'll say something intelligent! (I doubt it though)",
-    "Shock me, say something intelligent.",
-    "Your IQ's lower than your shoe size.",
-    "Alas! Your neurotransmitters are no more working.",
-    "Are you crazy you fool.",
-    "Everyone has the right to be stupid but you are abusing the privilege.",
-    "I'm sorry I hurt your feelings when I called you stupid. I thought you already knew that.",
-    "You should try tasting cyanide.",
-    "Your enzymes are meant to digest rat poison.",
-    "You should try sleeping forever.",
-    "Pick up a gun and shoot yourself.",
-    "You could make a world record by jumping from a plane without parachute.",
-    "Stop talking BS and jump in front of a running bullet train.",
-    "Try bathing with Hydrochloric Acid instead of water.",
-    "Try this: if you hold your breath underwater for an hour, you can then hold it forever.",
-    "Go Green! Stop inhaling Oxygen.",
-    "God was searching for you. You should leave to meet him.",
-    "Give your 100%. Now, go donate blood.",
+    "Puoi scrivere meglio di così.",
+    "Legge n.234 art.56 non mi permette di parlare con degli umani stupidi come te.",
+    "Scusa, non vendiamo cervelli.",
+    "Credimi non sei normale.",
+    "Scommetto che la tua mente si sente come nuova, visto che non la usi mai.",
+    "Vaffanculo.",
+    "Gli zombie mangiano il cervello... tu sei al sicuro.",
+    "Non ti sei evoluto dalle scimmie, loro si sono evolute da te.",
+    "Torna a parlarmi quando il tuo IQ supererà la tua età.",
+    "Non sto dicendo che sei stupido, Sto solo dicendo che sei sfortunato quando si tratta di pemsare.",
+    "Che lingua stai parlando? Perchè suona come merda.",
+    "La stupidità non è un crimine, quindi sei libero.",
+    "Tu sei la prova che l'evoluzione può andare al contrario.",
+    "Ti avrei chiesto quanti anni avevi ma so che non puoi contare oltre 10.",
+    "Da un animale, cosa pensi della razza umana?",
+    "Le menti non sono tutto. Nel tuo caso non sono nulla.",
+    "Le persone normali vivono e imparano. Tu vivi soltanto.",
+    "Non so cosa ti fa essere così stupido, ma funziona veramente.",
+    "Continua a parlare, amgari un giorno dirai qualcosa di intelligente! (Ne dubito però)",
+    "Spaventami, dì qualcosa di intelligente.",
+    "Il tuo IQ è più basso del numero delle tue scarpe.",
+    "Alas! I tuoi neurotrasmettitori non stanno più funzionando.",
+    "Che cojone.",
+    "Ognuno ha il diritto di essere stupido ma tu ne stai abusando.",
+    "Mi dispiace che ti ho urtato quando ti ho chiamato stupido. Pensavo lo sapessi già.",
+    "Dovresti assaggiare il cianuro, sai.",
+    "I tuoi enzimi sono ideati per digerire il veleno di ratto.",
+    "Dovresti provare a dormire per sempre.",
+    "Prendi una pistola e sparati.",
+    "Potresti fare un record buttandoti da un aereo senza il paracadute.",
+    "Smetti di parlare e buttati su una ferrovia ad altà velocità.",
+    "Prova a lavarti con l'acido invece che con l'acqua.",
+    "Prova questo: se tieni il respiro sott'acqua per un ora, puoi tenerlo per sempre.",
+    "Rispetta l'ambiente! Smetti di respirare l'ossigeno.",
+    "Dio ti stava cercando. Dovresti andartene per incontrarlo.",
+    "Dai il tuo 100%. Ora, vai a donare il sangue.",
     "Try jumping from a hundred story building but you can do it only once.",
     "You should donate your brain seeing that you never used it.",
     "Volunteer for target in an firing range.",
@@ -502,7 +502,7 @@ RAPE_STRINGS = [
      "`Rape krdunga pata bhi nahi chalega`",
      "`Doing Rape isn't a Good Thing Senpai !`",
      "`Lodu Andha hai kya Yaha tera rape ho raha hai aur tu abhi tak yahi gaand mara raha hai lulz`",
-] 
+]
 
 ABUSE_STRINGS = [
        "`Madharchod`",
@@ -516,7 +516,7 @@ ABUSE_STRINGS = [
 	   "`Muh Me Lega Bhosdike ?`",
 	   "`Kro Gandu giri kam nhi toh Gand Maar lenge tumhari hum😂`",
        "`Suno Lodu Jyda muh na chalo be muh me lawda pel Diyaa jayega`",
-       "`Nikal Lode, pehli fursta me nikal`",       
+       "`Nikal Lode, pehli fursta me nikal`",
        "`Taali bajao Lawde ke liye`",
 ]
 
@@ -551,7 +551,7 @@ ABUSEHARD_STRING = [
 	"`Taare hai Asmaan me very very bright jaat na jla bskd dekh le apni hight.`",
         "`Zindagi ki na toote lari iski lulli hoti nhi khadi`",
         "`Kbhi kbhi meri dil me khyaal ata hai ayse chutiyo ko kon paida kr jata hai😂.`",
-        "`Saawan ka mahina pawan kare shor jake gand mara bskd kahi aur.`", 
+        "`Saawan ka mahina pawan kare shor jake gand mara bskd kahi aur.`",
         "`Dil ke armaa ansuon me beh jaye tum bskd ke chutiye hi reh gye.`",
         "`Ishq Se Tabiyat Ne Zeest Ka Mazaa aya maine is lodu ko randi khane me paya.`",
         "`Mirza galib ki yeh khani hai tu bhosdika hai yeh sab ki jubani hai.`",
@@ -578,7 +578,7 @@ ABUSEHARD_STRING = [
      "`Taare hai Asmaan me very very bright jhaat na jla bsdk dekh le apni height.`",
      "`jindagi ki na toote lari iski lulli hoti nhi khadi`",
      "`Kbhi kbhi meri dil me khyaal ata hai ayse chutiyo ko kon paida kr jata hai😂.`",
-     "`Saawan ka mahina pawan kare shor jake gand mara bskd kahi aur.`", 
+     "`Saawan ka mahina pawan kare shor jake gand mara bskd kahi aur.`",
      "`Dil ke armaa ansuon me beh jaye tum bskd ke chutiye hi reh gye.`",
      "`Ishq Se Tabiyat Ne Zeest Ka Mazaa aya maine is lodu ko randi khane me paya.`",
      "`Mirza galib ki yeh khani hai tu bhosdika hai yeh sab ki jubani hai.`",
@@ -861,8 +861,8 @@ async def cry(e):
 async def insult(e):
     """ I make you cry !! """
     await e.edit(choice(INSULT_STRINGS))
-    
-    
+
+
 @register(outgoing=True, pattern="^.noob$")
 async def insult(e):
     """ I make you cry !! """
@@ -1142,7 +1142,7 @@ async def bluetext(bt_e):
         await bt_e.edit(
             "/BLUETEXT /MUST /CLICK.\n"
             "/ARE /YOU /A /STUPID /ANIMAL /WHICH /IS /ATTRACTED /TO /COLOURS?")
-            
+
 
 @register(outgoing=True, pattern="^.hack$")
 async def hacking (hacked):
@@ -1153,7 +1153,7 @@ async def hacking (hacked):
                 "`Targeted Account Hacked successfully 😎......`\n"
                 "`Pay Rs.69,000 to` [Spyder](https://t.me/spyderzzz/) `to Remove This Hack...`\n"
             )
-			  
+
 @register(outgoing=True, pattern="^.kill$")
 async def killing (killed):
     """ Dont Kill Too much -_-"""
@@ -1168,27 +1168,27 @@ async def killing (killed):
 @register(outgoing=True, pattern="^.rape$")
 async def insult(e):
     """ Don't Rape too much """
-    await e.edit(choice(RAPE_STRINGS)) 
-			  
-             
+    await e.edit(choice(RAPE_STRINGS))
+
+
 @register(outgoing=True, pattern="^.pro$")
 async def insult(e):
     """ Insult some Pros """
     await e.edit(choice(PRO_STRINGS))
-			  
-              
+
+
 @register(outgoing=True, pattern="^.abusehard$")
 async def insult(e):
     """ Don't use these too much bsdk """
     await e.edit(choice(ABUSEHARD_STRING))
-			  
-			  
+
+
 @register(outgoing=True, pattern="^.gey$")
 async def insult(e):
     """ Use only for gey ppl  """
     await e.edit(choice(GEY_STRINGS))
-			  
-			  
+
+
 @register(outgoing=True, pattern="^.abuse$")
 async def insult(e):
     """ Don't Abuse too much BSDK """

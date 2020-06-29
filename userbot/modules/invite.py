@@ -21,7 +21,7 @@ async def _(event):
                     ))
                 except Exception as e:
                     await event.reply(str(e))
-            await event.edit("Invited Successfully")
+            await event.edit("Invitato correttamente")
         else:
             # https://lonamiwebs.github.io/Telethon/methods/channels/invite_to_channel.html
             for user_id in to_add_users.split(" "):
@@ -32,4 +32,4 @@ async def _(event):
                     ))
                 except Exception as e:
                     await event.reply(str(e))
-            await event.edit("Nibba Invited Successfully.")
+            await event.edit("Invitato correttamente.")
