@@ -22,29 +22,29 @@ except AttributeError:
 
 # ========================= CONSTANTS ============================
 AFKSTR = [
-    "I'm busy right now. Please talk in a bag and when I come back you can just give me the bag!",
-    "I'm away right now. If you need anything, leave a message after the beep:\n`beeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeep`!",
-    "You missed me, next time aim better.",
-    "I'll be back in a few minutes and if I'm not...,\nwait longer.",
-    "I'm not here right now, so I'm probably somewhere else.",
+    "Adesso sono occupato. Per favore, parla in una borsa e quando torno puoi darmi la borsa!",
+    "Sono via adesso. Se hai bisogno di qualcosa, lascia un messaggio dopo il segnale acustico:\n`beeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeep`!",
+    "Ti sono mancato, la prossima volta mirare meglio.",
+    "Torno tra qualche minuto e se non lo sono...,\naspetta di più.",
+    "Non sono qui in questo momento, quindi probabilmente sono altrove.",
     "Roses are red,\nViolets are blue,\nLeave me a message,\nAnd I'll get back to you.",
-    "Sometimes the best things in life are worth waiting for…\nI'll be right back.",
-    "I'll be right back,\nbut if I'm not right back,\nI'll be back later.",
-    "If you haven't figured it out already,\nI'm not here.",
-    "Hello, welcome to my away message, how may I ignore you today?",
-    "I'm away over 7 seas and 7 countries,\n7 waters and 7 continents,\n7 mountains and 7 hills,\n7 plains and 7 mounds,\n7 pools and 7 lakes,\n7 springs and 7 meadows,\n7 cities and 7 neighborhoods,\n7 blocks and 7 houses...\n\nWhere not even your messages can reach me!",
-    "I'm away from the keyboard at the moment, but if you'll scream loud enough at your screen, I might just hear you.",
-    "I went that way\n---->",
-    "I went this way\n<----",
-    "Please leave a message and make me feel even more important than I already am.",
-    "I am not here so stop writing to me,\nor else you will find yourself with a screen full of your own messages.",
-    "If I were here,\nI'd tell you where I am.\n\nBut I'm not,\nso ask me when I return...",
-    "I am away!\nI don't know when I'll be back!\nHopefully a few minutes from now!",
-    "I'm not available right now so please leave your name, number, and address and I will stalk you later.",
-    "Sorry, I'm not here right now.\nFeel free to talk to my userbot as long as you like.\nI'll get back to you later.",
-    "I bet you were expecting an away message!",
-    "Life is so short, there are so many things to do...\nI'm away doing one of them..",
-    "I am not here right now...\nbut if I was...\n\nwouldn't that be awesome?",
+    "A volte vale la pena aspettare le cose migliori della vita ...\nTorno subito.",
+    "Torno subito,\nMa se non tornerò subito,\nTornerò più tardi.",
+    "Se non l'hai già capito,\nNon sono qui.",
+    "Ciao, benvenuto nel mio messaggio, come posso ignorarti oggi?",
+    "Sono via oltre,\n7 mari e 7 continenti,\n7 montange e 7 colline,\n7 pianure e 7 tumuli,\n7 piscine e 7 laghi,\n7 sorgenti e 7 prati,\n7 città e 7 quartieri,\n7 blocchi e 7 case...\n\nDove neanche i tuoi messaggi possono raggiungermi!",
+    "Al momento sono lontano dalla tastiera, ma se urlerai abbastanza forte sul tuo schermo, potrei semplicemente sentirti.",
+    "Sono andato da questa parte\n---->",
+    "Sono andato da questa parte\n<----",
+    "Per favore, lascia un messaggio e fammi sentire ancora più importante di quanto lo sia già.",
+    "Non sono qui, quindi smettila di scrivermi,\naltrimenti ti ritroverai con uno schermo pieno dei tuoi messaggi.",
+    "Se ero qui,\nTi avrei detto dov'ero.\n\nMa se non sono qui,\nnon chiedere quando ritornerò.",
+    "Sono via!\nNon so quando ritornerò!\nSpero tra pochi minuti da adesso!",
+    "Al momento non sono disponibile, quindi per favore lascia il tuo nome, numero e indirizzo e ti seguirò più tardi.",
+    "Mi dispiace, non sono qui adesso.\nSentiti libero di parlare con il mio userbot per tutto il tempo che desideri.\nTi richiamo più tardi.",
+    "Scommetto che ti aspettavi un messaggio!",
+    "La vita è così breve, ci sono così tante cose da fare ...\nSono via facendo una di queste",
+    "Non sono qui adesso...\nma se fossi...\n\nnon sarebbe fantastico?",
 ]
 # =================================================================
 
@@ -66,8 +66,8 @@ async def mention_afk(mention):
         if ISAFK or ISAFK_SQL:
             if mention.sender_id not in USERS:
                 if EXCUSE:
-                    await mention.reply(f"I'm AFK right now.\
-                    \nReason: `{EXCUSE}`")
+                    await mention.reply(f"Sono offline adesso.\
+                    \nMotivo: `{EXCUSE}`")
                 else:
                     await mention.reply(str(choice(AFKSTR)))
                 USERS.update({mention.sender_id: 1})
@@ -76,8 +76,8 @@ async def mention_afk(mention):
                 if USERS[mention.sender_id] % randint(2, 4) == 0:
                     if EXCUSE:
                         await mention.reply(
-                            f"In case you didn't notice, I'm still AFK.\
-                        \nReason: `{EXCUSE}`")
+                            f"Nel caso non l'avessi notato, sono ancora AFK.\
+                        \nMotivo: `{EXCUSE}`")
                     else:
                         await mention.reply(str(choice(AFKSTR)))
                     USERS[mention.sender_id] = USERS[mention.sender_id] + 1
@@ -113,8 +113,8 @@ async def afk_on_pm(sender):
         if apprv and (ISAFK or ISAFK_SQL):
             if sender.sender_id not in USERS:
                 if EXCUSE:
-                    await sender.reply(f"I'm AFK right now.\
-                    \nReason: `{EXCUSE}`")
+                    await sender.reply(f"Sono offline adesso\
+                    \nMotivo: `{EXCUSE}`")
                 else:
                     await sender.reply(str(choice(AFKSTR)))
                 USERS.update({sender.sender_id: 1})
@@ -123,8 +123,8 @@ async def afk_on_pm(sender):
                 if USERS[sender.sender_id] % randint(2, 4) == 0:
                     if EXCUSE:
                         await sender.reply(
-                            f"In case you didn't notice, I'm still AFK.\
-                        \nReason: `{EXCUSE}`")
+                            f"Nel caso non l'avessi notato, sono ancora AFK\
+                        \nMotivo: `{EXCUSE}`")
                     else:
                         await sender.reply(str(choice(AFKSTR)))
                     USERS[sender.sender_id] = USERS[sender.sender_id] + 1
@@ -153,7 +153,7 @@ async def set_afk(afk_e):
         await afk_e.edit(f"Going AFK!\
         \nReason: `{string}`")
     else:
-        await afk_e.edit("`Going away from Virtual World !!`")
+        await afk_e.edit("`D'ora in poi sarò offline!`")
     if BOTLOG:
         await afk_e.client.send_message(BOTLOG_CHATID, "#AFK\nYou went AFK!")
     if afk_db:
@@ -183,8 +183,8 @@ async def type_afk_is_not_true(notafk):
         if BOTLOG:
             await notafk.client.send_message(
                 BOTLOG_CHATID,
-                "You've recieved " + str(COUNT_MSG) + " messages from " +
-                str(len(USERS)) + " chats while you were away",
+                "Hai ricevuto " + str(COUNT_MSG) + " messaggi da " +
+                str(len(USERS)) + " chat quando eri offline",
             )
             for i in USERS:
                 name = await notafk.client.get_entity(i)
