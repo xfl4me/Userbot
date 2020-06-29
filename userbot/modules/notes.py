@@ -157,7 +157,7 @@ CMD_HELP.update({
 \n\n.notes\
 \nUtilizzo: Invia la lista delle note salvate in una chat.\
 \n\n.clear <nome>\
-\nUsage: Cancella la nota selezionata.\
+\nUtilizzo: Cancella la nota selezionata.\
 \n\n.rmbotnotes <marie/rose>\
 \nUtilizzo: Rimuove tutte le note dei bot admin (Supportati: Marie, Rose e i loro cloni.) nella chat."
 })
