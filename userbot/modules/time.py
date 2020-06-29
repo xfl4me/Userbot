@@ -69,7 +69,7 @@ async def time_func(tdata):
         return
 
     if not timezones:
-        await tdata.edit("`Is the country you mentioned fucking exist?`")
+        await tdata.edit("`Forse il paese che hai specificato non è nel pianeta terra...`")
         return
 
     if len(timezones) == 1:

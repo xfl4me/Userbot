@@ -22,18 +22,18 @@ PACK_FULL = "Whoa! That's probably enough stickers for one pack, give it a break
 A pack can't have more than 120 stickers at the moment."
 
 KANGING_STR = [
-    "Using Witchery to kang this sticker...",
-    "Plagiarising hehe...",
-    "Inviting this sticker over to my pack...",
-    "Kanging this sticker...",
-    "Hey that's a nice sticker!\nMind if I kang?!..",
-    "hehe me stel ur stikér\nhehe.",
-    "Ay look over there (☉｡☉)!→\nWhile I kang this...",
-    "Roses are red violets are blue, kanging this sticker so my pacc looks cool",
-    "Imprisoning this sticker...",
-    "Mr.Steal Your Sticker is stealing this sticker... ",
-    "Imma Kanger...",
-    "Owner of this stiker got rekt",
+    "Sto usando la stregoneria per prendere questo sticker...",
+    "Ehi sticker, vuoi venire nel mio pacco?",
+    "Invitando questo sticker nel mio pacco...",
+    "Rubando questo sticker...",
+    "Hey questo è uno sticker bello!\nE se lo rubassi?!..",
+    "hehe ti rubo lo sticker\nhehe.",
+    "Oh guarda lì (☉｡☉)!→\nMentre rubo questo...",
+    "Le rose sono rosse le viole sono blu, rubo questo sticker (non fa rima ripp)",
+    "Imprigionando questo sticker...",
+    "Il mio userbot sta rubando questo sticker... ",
+    "Preso!!!...",
+    "Povero creatore di questo sticker",
 ]
 
 
@@ -77,10 +77,10 @@ async def kang(args):
             is_anim = True
             photo = 1
         else:
-            await args.edit("`Unsupported File!`")
+            await args.edit("`File non supportato`")
             return
     else:
-        await args.edit("`I can't kang that...`")
+        await args.edit("`Non posso rubarlo!`")
         return
 
     if photo:
@@ -102,7 +102,7 @@ async def kang(args):
                 emoji = splat[1]
 
         packname = f"a{user.id}_by_{user.username}_{pack}"
-        packnick = f"@{user.username}'s kang pack Vol.{pack}"
+        packnick = f"@{user.username} sticker rubati Vol.{pack}"
         cmd = '/newpack'
         file = io.BytesIO()
 
@@ -119,7 +119,7 @@ async def kang(args):
             urllib.request.Request(f'http://t.me/addstickers/{packname}'))
         htmlstr = response.read().decode("utf8").split('\n')
 
-        if "  A <strong>Telegram</strong> user has created the <strong>Sticker&nbsp;Set</strong>." not in htmlstr:
+        if "  Un utente <strong>Telegram</strong> ha creato lo <strong>Sticker&nbsp;Set</strong>." not in htmlstr:
             async with bot.conversation('Stickers') as conv:
                 await conv.send_message('/addsticker')
                 await conv.get_response()
@@ -130,9 +130,9 @@ async def kang(args):
                 while x.text == PACK_FULL:
                     pack += 1
                     packname = f"a{user.id}_by_{user.username}_{pack}"
-                    packnick = f"@{user.username}'s kang pack Vol.{pack}"
+                    packnick = f"@{user.username}sticker rubati Vol.{pack}"
                     await args.edit(f"`{kang_meme}\
-                    \n\nNOTE: Sticker will be added to Vol.{str(pack)}`")
+                    \n\nNOTA: lo Sticker sarà aggiunto al Vol.{str(pack)}`")
                     await conv.send_message(packname)
                     x = await conv.get_response()
                     if x.text == "Invalid pack selected.":
@@ -172,8 +172,8 @@ async def kang(args):
                         await conv.get_response()
                         # Ensure user doesn't get spamming notifications
                         await bot.send_read_acknowledge(conv.chat_id)
-                        await args.edit(f"`Haha, yes. New kang pack unlocked!\
-                            \nPack can be found [here](t.me/addstickers/{packname})",
+                        await args.edit(f"`Haha, si. Nuovo pacco di sticker rubati sbloccato!\
+                            \nIl pacco può essere trovato [qui](t.me/addstickers/{packname})",
                                         parse_mode='md')
                         return
                 if is_anim:
@@ -197,7 +197,7 @@ async def kang(args):
                 # Ensure user doesn't get spamming notifications
                 await bot.send_read_acknowledge(conv.chat_id)
         else:
-            await args.edit("`Brewing a new Pack...`")
+            await args.edit("`Creando un nuovo pacco...`")
             async with bot.conversation('Stickers') as conv:
                 await conv.send_message(cmd)
                 await conv.get_response()
@@ -241,8 +241,8 @@ async def kang(args):
                 # Ensure user doesn't get spamming notifications
                 await bot.send_read_acknowledge(conv.chat_id)
 
-        await args.edit(f"`Sticker kanged successfully!`\
-            \nPack can be found [here](t.me/addstickers/{packname})",
+        await args.edit(f"`Sticker rubato con successo!`\
+            \nIl pacco può essere trovato [qui](t.me/addstickers/{packname})",
                         parse_mode='md')
 
 
@@ -274,24 +274,24 @@ async def resize_photo(photo):
 @register(outgoing=True, pattern="^.stkrinfo$")
 async def get_pack_info(event):
     if not event.is_reply:
-        await event.edit("`I can't fetch info from nothing, can I ?!`")
+        await event.edit("`Non posso prendere le informazioni dal nulla...`")
         return
 
     rep_msg = await event.get_reply_message()
     if not rep_msg.document:
-        await event.edit("`Reply to a sticker to get the pack details`")
+        await event.edit("`Rispondi ad uno sticker per avere le informazioni`")
         return
 
     try:
         stickerset_attr = rep_msg.document.attributes[1]
         await event.edit(
-            "`Fetching details of the sticker pack, please wait..`")
+            "`Sto prendendo le informazioni, aspetta...`")
     except BaseException:
-        await event.edit("`This is not a sticker. Reply to a sticker.`")
+        await event.edit("`Questo non è uno sticker. Rispondi ad uno sticker.`")
         return
 
     if not isinstance(stickerset_attr, DocumentAttributeSticker):
-        await event.edit("`This is not a sticker. Reply to a sticker.`")
+        await event.edit("`Questo non è uno sticker. Rispondi ad uno sticker.`")
         return
 
     get_stickerset = await bot(
@@ -304,12 +304,12 @@ async def get_pack_info(event):
         if document_sticker.emoticon not in pack_emojis:
             pack_emojis.append(document_sticker.emoticon)
 
-    OUTPUT = f"**Sticker Title:** `{get_stickerset.set.title}\n`" \
-        f"**Sticker Short Name:** `{get_stickerset.set.short_name}`\n" \
-        f"**Official:** `{get_stickerset.set.official}`\n" \
-        f"**Archived:** `{get_stickerset.set.archived}`\n" \
-        f"**Stickers In Pack:** `{len(get_stickerset.packs)}`\n" \
-        f"**Emojis In Pack:**\n{' '.join(pack_emojis)}"
+    OUTPUT = f"**Titolo:** `{get_stickerset.set.title}\n`" \
+        f"**shortname:** `{get_stickerset.set.short_name}`\n" \
+        f"**Ufficiale:** `{get_stickerset.set.official}`\n" \
+        f"**Archiviato:** `{get_stickerset.set.archived}`\n" \
+        f"**Sticker nel pacco:** `{len(get_stickerset.packs)}`\n" \
+        f"**Emoji nel pacco:**\n{' '.join(pack_emojis)}"
 
     await event.edit(OUTPUT)
 
@@ -317,13 +317,13 @@ async def get_pack_info(event):
 CMD_HELP.update({
     "stickers":
     ".kang\
-\nUsage: Reply .kang to a sticker or an image to kang it to your userbot pack.\
+\nUtilizzo: Rispondi .kang ad uno sticker o ad una foto per inserirla nel pacco dell'userbot\
 \n\n.kang [emoji('s)]\
-\nUsage: Works just like .kang but uses the emoji('s) you picked.\
-\n\n.kang [number]\
-\nUsage: Kang's the sticker/image to the specified pack but uses 🤔 as emoji.\
-\n\n.kang [emoji('s)] [number]\
-\nUsage: Kang's the sticker/image to the specified pack and uses the emoji('s) you picked.\
+\nUtilizzo: Funziona come .kang ma assegna le emoji('s) che hai scelto.\
+\n\n.kang [numero]\
+\nUtilizzo: Invia lo sticker/immagine al pacco specificato ma usa 🤔 come emoji.\
+\n\n.kang [emoji('s)] [numero]\
+\nUstilizzo: Invia lo sticker/immagine al pacco specificato e usa l'emoji('s) che hai scelto.\
 \n\n.stkrinfo\
-\nUsage: Gets info about the sticker pack."
+\nUtilizzo: Prende le informazioni sul pacco."
 })

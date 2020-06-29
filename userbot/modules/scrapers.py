@@ -57,7 +57,7 @@ async def setlang(prog):
 @register(outgoing=True, pattern="^.carbon")
 async def carbon_api(e):
     """ A Wrapper for carbon.now.sh """
-    await e.edit("`Processing..`")
+    await e.edit("`Caricamento...`")
     CARBON = 'https://carbon.now.sh/?l={lang}&code={code}'
     global CARBONLANG
     textx = await e.get_reply_message()
@@ -67,7 +67,7 @@ async def carbon_api(e):
     elif textx:
         pcode = str(textx.message)  # Importing message to module
     code = quote_plus(pcode)  # Converting to urlencoded
-    await e.edit("`Making Carbon..\n25%`")
+    await e.edit("`Creando carbon...\n25%`")
     if os.path.isfile("./carbon.png"):
         os.remove("./carbon.png")
     url = CARBON.format(code=code, lang=CARBONLANG)
@@ -108,7 +108,7 @@ async def carbon_api(e):
     await e.client.send_file(
         e.chat_id,
         file,
-        caption="Here's your Carbon-Content xD",
+        caption="Ecco qui",
         force_document=True,
         reply_to=e.message.reply_to_msg_id,
     )
@@ -122,7 +122,7 @@ async def carbon_api(e):
 @register(outgoing=True, pattern="^.img (.*)")
 async def img_sampler(event):
     """ For .img command, search and return images matching the query. """
-    await event.edit("Processing...")
+    await event.edit("Caricamento")
     query = event.pattern_match.group(1)
     lim = findall(r"lim=\d+", query)
     try:
@@ -169,12 +169,12 @@ async def moni(event):
                     number, currency_from, rebmun, currency_to))
             else:
                 await event.edit(
-                    "`This seems to be some alien currency, which I can't convert right now.`"
+                    "`Sembra che sia una valuta aliena, che non posso ancora convertire.`"
                 )
         except Exception as e:
             await event.edit(str(e))
     else:
-        await event.edit("`Invalid syntax.`")
+        await event.edit("`Syntax invalida.`")
         return
 
 
@@ -252,7 +252,7 @@ async def urban_dict(ud_e):
     try:
         define(query)
     except HTTPError:
-        await ud_e.edit(f"Sorry, couldn't find any results for: {query}")
+        await ud_e.edit(f"Mi dispiace, non posso trovare alcun risultato per: {query}")
         return
     mean = define(query)
     deflen = sum(len(i) for i in mean[0]["def"])
@@ -281,7 +281,7 @@ async def urban_dict(ud_e):
                 BOTLOG_CHATID,
                 "ud query `" + query + "` executed successfully.")
     else:
-        await ud_e.edit("No result found for **" + query + "**")
+        await ud_e.edit("Nessun risultato trovato per **" + query + "**")
 
 
 @register(outgoing=True, pattern=r"^.tts(?: |$)([\s\S]*)")
@@ -295,22 +295,22 @@ async def text_to_speech(query):
         message = textx.text
     else:
         await query.edit(
-            "`Give a text or reply to a message for Text-to-Speech!`")
+            "`Invia un messaggio di testo per il text to speech`")
         return
 
     try:
         gTTS(message, TTS_LANG)
     except AssertionError:
         await query.edit(
-            'The text is empty.\n'
+            'Il testo è vuoto.\n'
             'Nothing left to speak after pre-precessing, tokenizing and cleaning.'
         )
         return
     except ValueError:
-        await query.edit('Language is not supported.')
+        await query.edit('Lingua non supportata.')
         return
     except RuntimeError:
-        await query.edit('Error loading the languages dictionary.')
+        await query.edit('Errore durante il caricamento dei Dizionari.')
         return
     tts = gTTS(message, TTS_LANG)
     tts.save("k.mp3")
