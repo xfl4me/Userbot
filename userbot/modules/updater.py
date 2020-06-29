@@ -6,7 +6,7 @@
 """
 This module updates the userbot based on Upstream revision
 """
-
+import os
 from os import remove, execle, path, makedirs, getenv
 from shutil import rmtree
 import asyncio
