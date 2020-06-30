@@ -40,7 +40,7 @@ async def download(target_file):
     if not target_file.text[0].isalpha() and target_file.text[0] not in ("/", "#", "@", "!"):
         if target_file.fwd_from:
             return
-        await target_file.edit("Processing ...")
+        await target_file.edit("Caricamento...")
         input_str = target_file.pattern_match.group(1)
         if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
             os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
@@ -178,7 +178,7 @@ async def upload(u_event):
         if u_event.is_channel and not u_event.is_group:
             await u_event.edit("`L'upload non è permesso nei canali`")
             return
-        await u_event.edit("Processing ...")
+        await u_event.edit("Caricamento...")
         input_str = u_event.pattern_match.group(1)
         if input_str in ("userbot.session", "config.env"):
             await u_event.edit("`Questa è un operazione pericolosa! Non permessa!`")

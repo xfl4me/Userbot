@@ -51,11 +51,11 @@ async def telegraphs(grop):
 CMD_HELP.update({
     "create": "\
 Create\
-\nUsage: Create Channel, Group & Group With Bot.\
+\nUtilizzo: Crea Canale, Gruppo & Gruppo con il bot.\
 \n\n.create g\
-\nUsage: Create a Private Group.\
+\nUtilizzo: Crea un gruppo privato.\
 \n\n.create b\
-\nUsage: Create a Group with Bot.\
+\nUtilizzo: Crea un gruppo con il bot.\
 \n\n.create c\
-\nUsage: Create a Channel.\
+\nUtilizzo: Crea un canale.\
 "})

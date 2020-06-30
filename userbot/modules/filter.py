@@ -71,11 +71,11 @@ async def add_new_filter(new_handler):
     elif new_handler.reply_to_msg_id and not string:
         rep_msg = await new_handler.get_reply_message()
         string = rep_msg.text
-    success = "`Filter` **{}** `{} successfully`"
+    success = "`Filter` **{}** `{} correttamente`"
     if add_filter(str(new_handler.chat_id), keyword, string, msg_id) is True:
-        await new_handler.edit(success.format(keyword, 'added'))
+        await new_handler.edit(success.format(keyword, 'aggiunto'))
     else:
-        await new_handler.edit(success.format(keyword, 'updated'))
+        await new_handler.edit(success.format(keyword, 'aggiornato'))
 
 
 @register(outgoing=True, pattern="^.stop (\w*)")
@@ -88,10 +88,10 @@ async def remove_a_filter(r_handler):
         return
     filt = r_handler.pattern_match.group(1)
     if not remove_filter(r_handler.chat_id, filt):
-        await r_handler.edit("`Filter` **{}** `doesn't exist.`".format(filt))
+        await r_handler.edit("`Filter` **{}** `non esiste.`".format(filt))
     else:
         await r_handler.edit(
-            "`Filter` **{}** `was deleted successfully`".format(filt))
+            "`Filter` **{}** `eliminato correttamente`".format(filt))
 
 
 @register(outgoing=True, pattern="^.rmbotfilters (.*)")
@@ -101,9 +101,9 @@ async def kick_marie_filter(event):
     cmd = event.text[0]
     bot_type = event.pattern_match.group(1).lower()
     if bot_type not in ["marie", "rose"]:
-        await event.edit("`That bot is not yet supported!`")
+        await event.edit("`Questo bot non è supportato!`")
         return
-    await event.edit("```Will be kicking away all Filters!```")
+    await event.edit("```Distruggerà tutti i filters!```")
     await sleep(3)
     resp = await event.get_reply_message()
     filters = resp.text.split("-")[1:]
@@ -129,11 +129,11 @@ async def filters_active(event):
     except AttributeError:
         await event.edit("`Running on Non-SQL mode!`")
         return
-    transact = "`There are no filters in this chat.`"
+    transact = "`Non ci sono filters in questa chat.`"
     filters = get_filters(event.chat_id)
     for filt in filters:
-        if transact == "`There are no filters in this chat.`":
-            transact = "Active filters in this chat:\n"
+        if transact == "`Non ci sono filters in questa chat.`":
+            transact = "Filters attivi in questa chat:\n"
             transact += "`{}`\n".format(filt.keyword)
         else:
             transact += "`{}`\n".format(filt.keyword)
@@ -144,13 +144,13 @@ async def filters_active(event):
 CMD_HELP.update({
     "filter":
     ".filters\
-    \nUsage: Lists all active userbot filters in a chat.\
+    \nUtilizzo: Elenca tutti i filters attivi in una chat.\
     \n\n.filter <keyword> <reply text> or reply to a message with .filter <keyword>\
-    \nUsage: Saves the replied message as a reply to the 'keyword'.\
-    \nThe bot will reply to the message whenever 'keyword' is mentioned.\
-    \nWorks with everything from files to stickers.\
+    \nUtilizzo: Salva il messaggio risposto come una risposta automatica alla keyword 'keyword'.\
+    \nIl bot risponderà al messaggio se la keyword è menzionata.\
+    \nFunziona con tutti gli allegati.\
     \n\n.stop <filter>\
-    \nUsage: Stops the specified filter.\
+    \nUtilizzo: Ferma il filter specificato.\
     \n\n.rmbotfilters <marie/rose>\
-    \nUsage: Removes all filters of admin bots (Currently supported: Marie, Rose and their clones.) in the chat."
+    \nUtilizzo: Rimuove tutti i filters dei bot (Supportati: Marie, Rose e i loro cloni.) nella chat."
 })

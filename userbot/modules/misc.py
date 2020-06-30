@@ -40,33 +40,33 @@ async def sleepybot(time):
         await time.reply("Syntax: `.sleep [seconds]`")
     else:
         counter = int(time.pattern_match.group(1))
-        await time.edit("`I am sulking and snoozing....`")
+        await time.edit("Sto aspettando il tempo stabilito`")
         await sleep(2)
         if BOTLOG:
             await time.client.send_message(
                 BOTLOG_CHATID,
-                "You put the bot to sleep for " + str(counter) + " seconds",
+                "Hai messo il bot in pausa per " + str(counter) + " secondi",
             )
         await sleep(counter)
-        await time.edit("`OK, I'm awake now.`")
+        await time.edit("`OK, sono sveglio ora.`")
 
 
 @register(outgoing=True, pattern="^.shutdown$")
 async def killdabot(event):
     """ For .shutdown command, shut the bot down."""
-    await event.edit("`Goodbye *Windows XP shutdown sound*....`")
+    await event.edit("`Arrivederci, *suono di windows xp*....`")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#SHUTDOWN \n"
-                                        "Bot shut down")
+                                        "Bot spento")
     await bot.disconnect()
 
 
 @register(outgoing=True, pattern="^.restart$")
 async def killdabot(event):
-    await event.edit("`BRB... *PornHub intro*`")
+    await event.edit("`Riaccendo...`")
     if BOTLOG:
         await event.client.send_message(BOTLOG_CHATID, "#RESTART \n"
-                                        "Bot Restarted")
+                                        "Bot Riavviato")
     await bot.disconnect()
     # Spin a new instance of bot
     execl(sys.executable, sys.executable, *sys.argv)
@@ -91,7 +91,7 @@ async def repeat(rep):
 async def repo_is_here(wannasee):
     """ For .repo command, just returns the repo URL. """
     await wannasee.edit(
-        f"Click [here]({UPSTREAM_REPO_URL}) to open my Lit userbot's repository.")
+        f"Clicca [qui]({UPSTREAM_REPO_URL}) per installare l'userbot di @xfl4me.")
 
 
 @register(outgoing=True, pattern="^.raw$")
@@ -121,45 +121,45 @@ async def raw(event):
 CMD_HELP.update({
     'random':
     '.random <item1> <item2> ... <itemN>\
-\nUsage: Get a random item from the list of items.'
+\nUtilizzo: Sceglie qualcosa di casuale da una lista di elementi.'
 })
 
 CMD_HELP.update({
     'sleep':
     '.sleep <seconds>\
-\nUsage: Userbots get tired too. Let yours snooze for a few seconds.'
+\nUtilizzo: Anche il bot si addormenta, fallo dormire per qualche istante.'
 })
 
 CMD_HELP.update({
     "shutdown":
     ".shutdown\
-\nUsage: Sometimes you need to shut down your bot. Sometimes you just hope to\
-hear Windows XP shutdown sound... but you don't."
+\nUtilizzo: Alcune volte devi spegnere il bot. Alcune volte speri semplicemente di\
+sentire il suono di spegnimento di Windows XP... ma non succederà."
 })
 
 CMD_HELP.update({
     'repo':
     '.repo\
-\nUsage: If you are curious what makes the userbot work, this is what you need.'
+\nUtilizzo: Se vuoi dare istruzioni agli altri per installare il bot.'
 })
 
 CMD_HELP.update({
     "readme":
     ".readme\
-\nUsage: Provide links to setup the userbot and it's modules."
+\nUtilizzo: Invia link per installare l'userbot e caricare i moduli (in inglese)."
 })
 
 CMD_HELP.update({
     "repeat":
     ".repeat <no.> <text>\
-\nUsage: Repeats the text for a number of times. Don't confuse this with spam tho."
+\nUtilizzo: Ripete il testo per un numero di volte. Non confondere questo con spam."
 })
 
 CMD_HELP.update({"restart": ".restart\
-\nUsage: Restarts the bot !!"})
+\nUtilizzo: Riavvia il bot !!"})
 
 CMD_HELP.update({
     "raw":
     ".raw\
-\nUsage: Get detailed JSON-like formatted data about replied message."
+\nUtilizzo: Esporta dati dettagliati sul messaggio in risposta su un file .json."
 })

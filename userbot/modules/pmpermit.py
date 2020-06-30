@@ -16,10 +16,10 @@ from userbot import (COUNT_PM, CMD_HELP, BOTLOG, BOTLOG_CHATID, PM_AUTO_BAN,
 from userbot.events import register
 
 # ========================= CONSTANTS ============================
-UNAPPROVED_MSG = ("`Welcome, You are a wonderful person with a wonderful view of life.`\n\n"
-                  "`Your companionship is always an opportunity But Sed This line is not for you.`"
-                  "`So just tell why you are here ?`\n\n"
-                  "`Your message will be responded when I'm free,Don't sit here whole day coz there are lots of pending messages😶‚`")
+UNAPPROVED_MSG = ("`Benvenuta, sei una persona magnifica con una visione della vita magnifica. Cit. userbot`\n\n"
+                  "`Dimmi perché sei qui`"
+                  "`Quindi dimmi perchè sei qui`\n\n"
+                  "`Risponderò al tuo messaggio quando sarò libero, perchè ho moltissime cose da fare...😶`")
 # =================================================================
 
 
@@ -68,8 +68,8 @@ async def permitpm(event):
 
                 if COUNT_PM[event.chat_id] > 4:
                     await event.respond(
-                        "`You were spamming my master's PM, which I didn't like.`\n"
-                        "`You have been BLOCKED and reported as SPAM, until further notice.`"
+                        "`Stavi spammando la chat del mio maestro.`\n"
+                        "`Sei stato bloccato e segnalato come spam.`"
                     )
 
                     try:
@@ -79,9 +79,9 @@ async def permitpm(event):
                         if BOTLOG:
                             await event.client.send_message(
                                 BOTLOG_CHATID,
-                                "Count PM is seemingly going retard, plis restart bot!",
+                                "L'userbot sta andando male per colpa delle persone che ne abusano, riavvialo",
                             )
-                        LOGS.info("CountPM wen't rarted boi")
+                        LOGS.info("L'userbot sta andando male, riavvialo")
                         return
 
                     await event.client(BlockRequest(event.chat_id))
@@ -94,7 +94,7 @@ async def permitpm(event):
                             BOTLOG_CHATID,
                             "[" + name0 + "](tg://user?id=" +
                             str(event.chat_id) + ")" +
-                            " was just another retarded nibba",
+                            " era solo un altro ritardato",
                         )
 
 
@@ -128,7 +128,7 @@ async def auto_accept(event):
                 if is_approved(event.chat_id) and BOTLOG:
                     await event.client.send_message(
                         BOTLOG_CHATID,
-                        "#AUTO-APPROVED\n" + "User: " +
+                        "#AUTO-APPROVATO\n" + "Utente: " +
                         f"[{chat.first_name}](tg://user?id={chat.id})",
                     )
 
@@ -181,10 +181,10 @@ async def approvepm(apprvpm):
     try:
         approve(uid)
     except IntegrityError:
-        await apprvpm.edit("`This nibba may already be approved.`")
+        await apprvpm.edit("`Forse è già approvato.`")
         return
 
-    await apprvpm.edit(f"[{name0}](tg://user?id={uid}) `approved to PM!`")
+    await apprvpm.edit(f"[{name0}](tg://user?id={uid}) `approvato!`")
 
     async for message in apprvpm.client.iter_messages(apprvpm.chat_id,
                                                       from_user='me',
@@ -194,7 +194,7 @@ async def approvepm(apprvpm):
     if BOTLOG:
         await apprvpm.client.send_message(
             BOTLOG_CHATID,
-            "#APPROVED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
+            "#APPROVATO\n" + "Utente: " + f"[{name0}](tg://user?id={uid})",
         )
 
 
@@ -218,13 +218,13 @@ async def disapprovepm(disapprvpm):
         name0 = str(aname.first_name)
 
     await disapprvpm.edit(
-        f"[{name0}](tg://user?id={disapprvpm.chat_id}) `Disaproved to PM!`")
+        f"[{name0}](tg://user?id={disapprvpm.chat_id}) `Non più approvato!`")
 
     if BOTLOG:
         await disapprvpm.client.send_message(
             BOTLOG_CHATID,
             f"[{name0}](tg://user?id={disapprvpm.chat_id})"
-            " was disapproved to PM you master.",
+            "non più approvato.",
         )
 
 
@@ -237,12 +237,12 @@ async def blockpm(block):
         aname = replied_user.id
         name0 = str(replied_user.first_name)
         await block.client(BlockRequest(replied_user.id))
-        await block.edit("`You've been blocked!`")
+        await block.edit("`Sei stato bloccato!`")
         uid = replied_user.id
     else:
         await block.client(BlockRequest(block.chat_id))
         aname = await block.client.get_entity(block.chat_id)
-        await block.edit("`You've been blocked!`")
+        await block.edit("`Sei stato bloccato!`")
         name0 = str(aname.first_name)
         uid = block.chat_id
 
@@ -255,7 +255,7 @@ async def blockpm(block):
     if BOTLOG:
         await block.client.send_message(
             BOTLOG_CHATID,
-            "#BLOCKED\n" + "User: " + f"[{name0}](tg://user?id={uid})",
+            "#BLOCCATO\n" + "Utente: " + f"[{name0}](tg://user?id={uid})",
         )
 
 
@@ -267,13 +267,13 @@ async def unblockpm(unblock):
         replied_user = await unblock.client.get_entity(reply.from_id)
         name0 = str(replied_user.first_name)
         await unblock.client(UnblockRequest(replied_user.id))
-        await unblock.edit("`You have been unblocked.\nThank my master's forgiveness`")
+        await unblock.edit("`Sei stato sbloccato.\nGrazie al perdono del mio maestro`")
 
     if BOTLOG:
         await unblock.client.send_message(
             BOTLOG_CHATID,
             f"[{name0}](tg://user?id={replied_user.id})"
-            " was unblocc'd!.",
+            "sbloccato.",
         )
 
 
@@ -281,15 +281,15 @@ CMD_HELP.update({
     "pmpermit":
     "\
 .approve\
-\nUsage: Approves the mentioned/replied person to PM.\
+\nUtilizzo: Approva la persona in pvt.\
 \n\n.disapprove\
-\nUsage: Disapproves the mentioned/replied person to PM.\
+\nUtilizzo: Disapprova la persona in pvt.\
 \n\n.block\
-\nUsage: Blocks the person.\
+\nUtilizzo: Blocca la persona.\
 \n\n.unblock\
-\nUsage: Unblocks the person so they can PM you.\
+\nUtilizzo: Sblocca la persona.\
 \n\n.notifoff\
-\nUsage: Clears/Disables any notifications of unapproved PMs.\
+\nUtilizzo: Disattiva le notifiche dalle chat private non approvate.\
 \n\n.notifon\
-\nUsage: Allows notifications for unapproved PMs."
+\nUtilizzo: Abilita le notifiche per le chat private non approvate."
 })

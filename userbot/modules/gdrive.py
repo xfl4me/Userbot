@@ -42,7 +42,7 @@ G_DRIVE_DIR_MIME_TYPE = "application/vnd.google-apps.folder"
 @register(pattern=r"^.gdrive(?: |$)(.*)", outgoing=True)
 async def gdrive_upload_function(dryb):
     """ For .gdrive command, upload files to google drive. """
-    await dryb.edit("Processing ...")
+    await dryb.edit("Caricamento ...")
     input_str = dryb.pattern_match.group(1)
     if CLIENT_ID is None or CLIENT_SECRET is None:
         return
@@ -96,7 +96,7 @@ async def gdrive_upload_function(dryb):
                 pass
         if downloader.isSuccessful():
             await dryb.edit(
-                "Downloaded to `{}` successfully !!\nInitiating Upload to Google Drive.."
+                "Scaricato a `{}` correttamente !!\nOra carico su Drive..."
                 .format(downloaded_file_name))
             required_file_name = downloaded_file_name
         else:
@@ -106,11 +106,11 @@ async def gdrive_upload_function(dryb):
         if os.path.exists(input_str):
             required_file_name = input_str
             await dryb.edit(
-                "Found `{}` in local server, Initiating Upload to Google Drive.."
+                "Trovato `{}` nel server, Ora carico su drive..."
                 .format(input_str))
         else:
             await dryb.edit(
-                "File not found in local server. Give me a valid file path !")
+                "File non trovato. Dammi un percorso valido!")
             return False
     elif dryb.reply_to_msg_id:
         try:
@@ -119,13 +119,13 @@ async def gdrive_upload_function(dryb):
                 await dryb.get_reply_message(),
                 TEMP_DOWNLOAD_DIRECTORY,
                 progress_callback=lambda d, t: asyncio.get_event_loop(
-                ).create_task(progress(d, t, dryb, c_time, "Downloading...")))
+                ).create_task(progress(d, t, dryb, c_time, "Scaricando...")))
         except Exception as e:
             await dryb.edit(str(e))
         else:
             required_file_name = downloaded_file_name
             await dryb.edit(
-                "Downloaded to `{}` Successfully !!\nInitiating Upload to Google Drive.."
+                "Scaricato a `{}` correttamente !!\nOra carico su Drive..."
                 .format(downloaded_file_name))
     if required_file_name:
         if G_DRIVE_AUTH_TOKEN_DATA is not None:
@@ -147,16 +147,16 @@ async def gdrive_upload_function(dryb):
                                              file_name, mime_type, dryb,
                                              parent_id)
             await dryb.edit(
-                f"File:`{required_file_name}`\nwas Successfully Uploaded to [Google Drive]({g_drive_link})!"
+                f"File:`{required_file_name}`\nè stato caricato correttamente a [Google Drive]({g_drive_link})!"
             )
         except Exception as e:
             await dryb.edit(
-                f"Error while Uploading to Google Drive\nError Code:\n`{e}`")
+                f"Errore nel caricamento su Drive\nCodice errore:\n`{e}`")
 
 
 @register(pattern=r"^.ggd(?: |$)(.*)", outgoing=True)
 async def upload_dir_to_gdrive(event):
-    await event.edit("Processing ...")
+    await event.edit("Caricamento...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
         return
     input_str = event.pattern_match.group(1)
@@ -176,14 +176,14 @@ async def upload_dir_to_gdrive(event):
             http, os.path.basename(os.path.abspath(input_str)), parent_id)
         await DoTeskWithDir(http, input_str, event, dir_id)
         dir_link = "https://drive.google.com/folderview?id={}".format(dir_id)
-        await event.edit(f"Here is your Google Drive [link]({dir_link})")
+        await event.edit(f"Ecco il tuo link Google Drive [link]({dir_link})")
     else:
-        await event.edit(f"Directory {input_str} does not seem to exist")
+        await event.edit(f"La cartella {input_str} sembra che non esista")
 
 
 @register(pattern=r"^.list(?: |$)(.*)", outgoing=True)
 async def gdrive_search_list(event):
-    await event.edit("Processing ...")
+    await event.edit("Caricamento...")
     if CLIENT_ID is None or CLIENT_SECRET is None:
         return
     input_str = event.pattern_match.group(1).strip()
@@ -197,7 +197,7 @@ async def gdrive_search_list(event):
         storage = await create_token_file(G_DRIVE_TOKEN_FILE, event)
     http = authorize(G_DRIVE_TOKEN_FILE, storage)
     # Authorize, get file parameters, upload file and print out result URL for download
-    await event.edit(f"Searching for {input_str} in your Google Drive ...")
+    await event.edit(f"Cercando per {input_str} nel tuo Google Drive...")
     gsearch_results = await gdrive_search(http, input_str)
     await event.edit(gsearch_results, link_preview=False)
 
@@ -208,26 +208,26 @@ async def gdrive_search_list(event):
     outgoing=True)
 async def download(set):
     """For .gsetf command, allows you to set path"""
-    await set.edit("Processing ...")
+    await set.edit("Caricamento...")
     input_str = set.pattern_match.group(1)
     if input_str:
         parent_id = input_str
         await set.edit(
-            "Custom Folder ID set successfully. The next uploads will upload to {parent_id} till `.gdriveclear`"
+            "Id cartella impostato correttamente. I prossimi saranno caricati su {parent_id} fino a `.gdriveclear`"
         )
         await set.delete()
     else:
         await set.edit(
-            "Use `.gdrivesp <link to GDrive Folder>` to set the folder to upload new files to."
+            "Usa `.gdrivesp <link to GDrive Folder>` per impostare la cartella dove caricare i file."
         )
 
 
 @register(pattern="^.gsetclear$", outgoing=True)
 async def download(gclr):
     """For .gsetclear command, allows you clear ur curnt custom path"""
-    await gclr.reply("Processing ...")
+    await gclr.reply("Caricamento...")
     parent_id = GDRIVE_FOLDER_ID
-    await gclr.edit("Custom Folder ID cleared successfully.")
+    await gclr.edit("ID eliminato correttamente.")
 
 
 @register(pattern="^.gfolder$", outgoing=True)
@@ -235,11 +235,11 @@ async def show_current_gdrove_folder(event):
     if parent_id:
         folder_link = f"https://drive.google.com/drive/folders/" + parent_id
         await event.edit(
-            f"My userbot is currently uploading files [here]({folder_link})")
+            f"Il mio userbot sta caricando i file [qui]({folder_link})")
     else:
         await event.edit(
-            f"My userbot is currently uploading files to the root of my Google Drive storage.\
-            \nFind uploaded files [here](https://drive.google.com/drive/my-drive)"
+            f"Il mio userbot sta caricando i file nella cartella di root.\
+            \nTrova i file caricati [qui](https://drive.google.com/drive/my-drive)"
         )
 
 
@@ -260,7 +260,7 @@ async def create_token_file(token_file, event):
     authorize_url = flow.step1_get_authorize_url()
     async with event.client.conversation(BOTLOG_CHATID) as conv:
         await conv.send_message(
-            f"Go to the following link in your browser: {authorize_url} and reply the code"
+            f"Vai su questo link dal browser: {authorize_url} e rispondi con il codice"
         )
         response = conv.wait_event(
             events.NewMessage(outgoing=True, chats=BOTLOG_CHATID))
@@ -318,7 +318,7 @@ async def upload_file(http, file_path, file_name, mime_type, event, parent_id):
                 "".join(["░"
                          for i in range(10 - math.floor(percentage / 10))]),
                 round(percentage, 2))
-            current_message = f"Uploading to Google Drive\nFile Name: {file_name}\n{progress_str}"
+            current_message = f"Caricando su Google Drive\nNome del file: {file_name}\n{progress_str}"
             if display_message != current_message:
                 try:
                     await event.edit(current_message)
@@ -354,7 +354,7 @@ async def create_directory(http, directory_name, parent_id):
     file_id = file.get("id")
     drive_service.permissions().insert(fileId=file_id,
                                        body=permissions).execute()
-    LOGS.info("Created Gdrive Folder:\nName: {}\nID: {} ".format(
+    LOGS.info("Creata cartella Google Drive:\nNome: {}\nID: {} ".format(
         file.get("title"), file_id))
     return file_id
 
@@ -443,15 +443,15 @@ async def gdrive_search(http, search_query):
 CMD_HELP.update({
     "gdrive":
     ".gdrive <file_path / reply / URL|file_name>\
-    \nUsage: Uploads the file in reply , URL or file path in server to your Google Drive.\
+    \nUtilizzo: Carica il file in risposta, URL o percorso file su Gdrive.\
     \n\n.gsetf <GDrive Folder URL>\
-    \nUsage: Sets the folder to upload new files to.\
+    \nUtilizzo: Imposta la cartella dove saranno caricati i file.\
     \n\n.gsetclear\
-    \nUsage: Reverts to default upload destination.\
+    \nUsage: Reimposta la cartella dove i file vengono caricati.\
     \n\n.gfolder\
-    \nUsage: Shows your current upload destination/folder.\
+    \nUtilizzo: Mostra il percorso dove i file vengono caricati.\
     \n\n.list <query>\
-    \nUsage: Looks for files and folders in your Google Drive.\
+    \nUtilizzo: Cerca file e cartelle nel tuo Gdrive.\
     \n\n.ggd <path_to_folder_in_server>\
-    \nUsage: Uploads all the files in the directory to a folder in Google Drive."
+    \nUtilizzo: Carica tutti i file nella cartella del server su Gdrive."
 })

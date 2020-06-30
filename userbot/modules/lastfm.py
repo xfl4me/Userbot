@@ -21,14 +21,14 @@ from userbot import CMD_HELP, BOTLOG, BOTLOG_CHATID, DEFAULT_BIO, BIO_PREFIX, la
 from userbot.events import register
 
 # =================== CONSTANT ===================
-LFM_BIO_ENABLED = "```last.fm current music to bio is now enabled.```"
-LFM_BIO_DISABLED = "```last.fm current music to bio is now disabled. Bio reverted to default.```"
-LFM_BIO_RUNNING = "```last.fm current music to bio is already running.```"
-LFM_BIO_ERR = "```No option specified.```"
-LFM_LOG_ENABLED = "```last.fm logging to bot log is now enabled.```"
-LFM_LOG_DISABLED = "```last.fm logging to bot log is now disabled.```"
-LFM_LOG_ERR = "```No option specified.```"
-ERROR_MSG = "```last.fm module halted, got an unexpected error.```"
+LFM_BIO_ENABLED = "```Musica corrente nella bio abilitata.```"
+LFM_BIO_DISABLED = "```Musica corrente nella bio disabilitata. Bio riportata al normale.```"
+LFM_BIO_RUNNING = "```Musica corrente alla bio già abilitata.```"
+LFM_BIO_ERR = "```Nessun opzione specificata.```"
+LFM_LOG_ENABLED = "```Logging al bot abilitato.```"
+LFM_LOG_DISABLED = "```Logging al bot disabilitato.```"
+LFM_LOG_ERR = "```Nessun opzione specificata.```"
+ERROR_MSG = "```Errore critico.```"
 
 ARTIST = 0
 SONG = 0
@@ -48,7 +48,7 @@ LastLog = False
 @register(outgoing=True, pattern="^.lastfm$")
 async def last_fm(lastFM):
     """ For .lastfm command, fetch scrobble data from last.fm. """
-    await lastFM.edit("Processing...")
+    await lastFM.edit("Caricamento...")
     preview = None
     playing = User(LASTFM_USERNAME, lastfm).get_now_playing()
     username = f"https://www.last.fm/user/{LASTFM_USERNAME}"
@@ -219,9 +219,9 @@ async def lastlog(lstlog):
 CMD_HELP.update({
     'lastfm':
     ".lastfm\
-    \nUsage: Shows currently scrobbling track or most recent scrobbles if nothing is playing.\
+    \nUtilizzo: Mostra la traccia di scarabocchio attualmente o gli scarabocchi più recenti se non viene riprodotto nulla.\
     \n\nlastbio: .lastbio <on/off>\
-    \nUsage: Enables/Disables last.fm current playing to bio.\
+    \nUsage: Abilita o disattiva la bio.\
     \n\nlastlog: .lastlog <on/off>\
-    \nUsage: Enable/Disable last.fm bio logging in the bot-log group."
+    \nUsage: Abilita o disattiva il Logging."
 })
