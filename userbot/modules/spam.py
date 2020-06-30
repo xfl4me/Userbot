@@ -20,7 +20,7 @@ async def tmeme(e):
     if BOTLOG:
         await e.client.send_message(
             BOTLOG_CHATID, "#CSPAM\n"
-            "TSpam was executed successfully")
+            "TSpam eseguito correttamente")
 
 
 @register(outgoing=True, pattern="^.wspam (.*)")
@@ -33,9 +33,9 @@ async def tmeme(e):
     if BOTLOG:
         await e.client.send_message(
             BOTLOG_CHATID, "#WSPAM\n"
-            "WSpam was executed successfully")
-            
-            
+            "WSpam eseguito correttamente")
+
+
 @register(outgoing=True, pattern="^.bigspam")
 async def bigspam(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -49,7 +49,7 @@ async def bigspam(e):
             await e.client.send_message(
                 BOTLOG_CHATID,
                 "#BIGSPAM \n\n"
-                "Bigspam was executed successfully"
+                "Bigspam eseguito correttamente"
                 )
 
 
@@ -61,7 +61,7 @@ async def spammer(e):
     await asyncio.wait([e.respond(spam_message) for i in range(counter)])
     if BOTLOG:
         await e.client.send_message(BOTLOG_CHATID, "#SPAM\n"
-                                    "Spam was executed successfully")
+                                    "Spam eseguito correttamente")
 
 
 @register(outgoing=True, pattern="^.picspam")
@@ -76,7 +76,7 @@ async def tiny_pic_spam(e):
     if BOTLOG:
         await e.client.send_message(
             BOTLOG_CHATID, "#PICSPAM\n"
-            "PicSpam was executed successfully")
+            "PicSpam eseguito correttamente")
 
 
 @register(outgoing=True, pattern="^.delayspam (.*)")
@@ -91,8 +91,8 @@ async def spammer(e):
     if BOTLOG:
         await e.client.send_message(
             BOTLOG_CHATID, "#DelaySPAM\n"
-            "DelaySpam was executed successfully")
-            
+            "DelaySpam eseguito correttamente")
+
 @register(outgoing=True, pattern="^.gangsta")
 async def whoizme(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -112,7 +112,7 @@ async def whoizme(e):
         await asyncio.sleep(0.3)
         await e.edit("EVERyBOdy iZ GangSTur UNtIL I ArRivE 🔥")
 
-        
+
 @register(outgoing=True, pattern="^.nikal")
 async def whoizme(e):
     if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
@@ -140,8 +140,8 @@ async def repeat(e):
     repmessage = message * count
     await e.respond(repmessage)
     await e.delete()
-    
-    
+
+
 @register(outgoing=True, pattern="^.repeats")
 async def repeats(e):
     message = e.text[10:]
@@ -154,18 +154,18 @@ async def repeats(e):
 CMD_HELP.update({
     "spam":
     ".cspam <text>\
-\nUsage: Spam the text letter by letter.\
+\nUtilizzo: Spamma il testo lettera per lettera.\
 \n\n.spam <count> <text>\
-\nUsage: Floods text in the chat !!\
+\nUtilizzo: Flooda il testo nella chat\
 \n\n.wspam <text>\
-\nUsage: Spam the text word by word.\
+\nUtilizzo: Spamma il testo lettera per lettera.\
 \n\n.picspam <count> <link to image/gif>\
-\nUsage: As if text spam was not enough !!\
+\nUtilizzo: Spamma un immagine\
 \n\n.delayspam <delay> <count> <text>\
-\nUsage: .bigspam but with custom delay.\
+\nUtilizzo: .bigspam ma con pausa specificata\
 \n\n.gangsta\
-\nUsage: Gives you Gengster Feeling, btw Spyder is real Gangsta.\
+\nUtilizzo: Ti fa sentire come un GangSta, cmq @xfl4me è quello vero.\
 \n\n.nikal\
-\nUsage: Prevents Lawda Lassun.\
-\n\n\nNOTE : I am not responsible if you get banned for spamming!"
+\nUtilizzo: Non lo so, è tutto indiano...\
+\n\n\nNOTA : @xfl4me non è responsabile se vieni bannato per flood..."
 })

@@ -19,7 +19,7 @@ from userbot import GOOGLE_CHROME_BIN, CHROME_DRIVER, CMD_HELP
 @register(pattern=r"^.ss (.*)", outgoing=True)
 async def capture(url):
     """ For .ss command, capture a website's screenshot and send the photo. """
-    await url.edit("`Processing ...`")
+    await url.edit("`Caricamento...`")
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--test-type")
@@ -35,7 +35,7 @@ async def capture(url):
     if link_match:
         link = link_match.group()
     else:
-        await url.edit("`I need a valid link to take screenshots from.`")
+        await url.edit("`Mi serve un link valido.`")
         return
     driver.get(link)
     height = driver.execute_script(
@@ -46,7 +46,7 @@ async def capture(url):
     )
     driver.set_window_size(width + 125, height + 125)
     wait_for = height / 1000
-    await url.edit(f"`Generating screenshot of the page...`\
+    await url.edit(f"`Generando lo screenshot...`\
     \n`Height of page = {height}px`\
     \n`Width of page = {width}px`\
     \n`Waiting ({int(wait_for)}s) for the page to load.`")
@@ -59,7 +59,7 @@ async def capture(url):
         message_id = url.reply_to_msg_id
     with io.BytesIO(im_png) as out_file:
         out_file.name = "screencapture.png"
-        await url.edit("`Uploading screenshot as file..`")
+        await url.edit("`Caricando lo screenshot come .png...`")
         await url.client.send_file(url.chat_id,
                                    out_file,
                                    caption=input_str,
@@ -70,6 +70,6 @@ async def capture(url):
 CMD_HELP.update({
     "ss":
     ".ss <url>\
-    \nUsage: Takes a screenshot of a website and sends the screenshot.\
-    \nExample of a valid URL : `https://www.google.com`"
+    \nUtilizzo: Scatta e invia lo screenshot di un sito.\
+    \nEsempio di url valido: `https://www.google.com`"
 })

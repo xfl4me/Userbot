@@ -71,11 +71,11 @@ async def on_snip_save(event):
     elif event.reply_to_msg_id and not string:
         rep_msg = await event.get_reply_message()
         string = rep_msg.text
-    success = "`Snip {} successfully. Use` **${}** `anywhere to get it`"
+    success = "`Snip {} correttamente. Usa` **${}** `ovunque per averlo`"
     if add_snip(keyword, string, msg_id) is False:
-        await event.edit(success.format('updated', keyword))
+        await event.edit(success.format('aggiornato', keyword))
     else:
-        await event.edit(success.format('saved', keyword))
+        await event.edit(success.format('salvato', keyword))
 
 
 @register(outgoing=True, pattern="^.snips$")
@@ -87,11 +87,11 @@ async def on_snip_list(event):
         await event.edit("`Running on Non-SQL mode!`")
         return
 
-    message = "`No snips available right now.`"
+    message = "`Nessun snip disponibile adesso.`"
     all_snips = get_snips()
     for a_snip in all_snips:
-        if message == "`No snips available right now.`":
-            message = "Available snips:\n"
+        if message == "`Nessun snip disponibile adesso.`":
+            message = "Snips disponibili:\n"
             message += f"`${a_snip.snip}`\n"
         else:
             message += f"`${a_snip.snip}`\n"
@@ -109,21 +109,21 @@ async def on_snip_delete(event):
         return
     name = event.pattern_match.group(1)
     if remove_snip(name) is True:
-        await event.edit(f"`Successfully deleted snip:` **{name}**")
+        await event.edit(f"`Snip eliminato correttamente:` **{name}**")
     else:
-        await event.edit(f"`Couldn't find snip:` **{name}**")
+        await event.edit(f"`Impossibile trovare snip:` **{name}**")
 
 
 CMD_HELP.update({
     "snips":
     "\
 $<snip_name>\
-\nUsage: Gets the specified snip, anywhere.\
-\n\n.snip <name> <data> or reply to a message with .snip <name>\
-\nUsage: Saves the message as a snip (global note) with the name. (Works with pics, docs, and stickers too!)\
+\nUtilizzo: Prende lo snip specificato, ovunque.\
+\n\n.snip <name> <data> o risponi ad un messaggio con .snip <name>\
+\nUtilizzo: Salva il messaggio come snip (nota globale) con il nome. (Funziona anche con gli allegati!)\
 \n\n.snips\
-\nUsage: Gets all saved snips.\
+\nUtilizzo: Prende la lista di snip.\
 \n\n.remsnip <snip_name>\
-\nUsage: Deletes the specified snip.\
+\nUtilizzo: Elimina lo snip specificato.\
 "
 })
